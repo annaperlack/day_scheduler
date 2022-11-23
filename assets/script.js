@@ -1,5 +1,5 @@
 
-// wrapped script a window ready function
+// wrapped script in a window ready function
 $(document).ready(function (){
 
 // defining current hour
@@ -40,7 +40,7 @@ $(document).ready(function (){
     $(this).children('textarea').val(localStorage.getItem(id));
   })
   
-//sets current date in header section
+// sets current date in header section
 var today = dayjs();
 $('#currentDay').text(today.format('MMMM D, YYYY'));
 
