@@ -4,24 +4,31 @@
 
 
 $(document).ready(function (){
-  getScheduleTask();
-  
+
+
+// save hour and user task to local storage when user clicks button
   $("button").click(function() {
     alert("Your task has been saved");
-    var timeBlock = $(this).parent('.time-block')[0];
-    var userTask = $(timeBlock).find('.description')[0].value;
+    var timeBlock = $(this).parent('.time-block');
+    var userTask = $(this).siblings('.description').val();
     var hourId = $(timeBlock).attr('id');
-    storeScheduleTask(hourId, userTask);
+    storeScheduledTask(hourId, userTask);
   })
 
-  function storeScheduleTask(hourId, userTask) {
+  function storeScheduledTask(hourId, userTask) {
   localStorage.setItem(hourId, userTask);
   }
 
-  function getScheduleTask(hourId) {
-  return localStorage.getItem(hourId);
-  }
-
+// saves user task to text area
+  $('.time-block').each(function(){
+    var id = $(this).attr('id');
+    console.log(id);
+    $(this).children('textarea').val(localStorage.getItem(id));
+  })
+  
+//sets current date in header section
+var today = dayjs();
+$('#currentDay').text(today.format('MMMM D, YYYY'));
 
 });
 
@@ -46,8 +53,6 @@ $(document).ready(function (){
   // attribute of each time-block be used to do this?
   
 
-//sets current date in header section
-var today = dayjs();
-$('#currentDay').text(today.format('MMMM D, YYYY'));
+
 
 
