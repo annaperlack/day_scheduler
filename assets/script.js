@@ -1,7 +1,33 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
+
+
+$(document).ready(function (){
+  getScheduleTask();
+  
+  $("button").click(function() {
+    alert("Your task has been saved");
+    var timeBlock = $(this).parent('.time-block')[0];
+    var userTask = $(timeBlock).find('.description')[0].value;
+    var hourId = $(timeBlock).attr('id');
+    storeScheduleTask(hourId, userTask);
+  })
+
+  function storeScheduleTask(hourId, userTask) {
+  localStorage.setItem(hourId, userTask);
+  }
+
+  function getScheduleTask(hourId) {
+  return localStorage.getItem(hourId);
+  }
+
+
+});
+
+
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -18,9 +44,10 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
+  
 
+//sets current date in header section
 var today = dayjs();
 $('#currentDay').text(today.format('MMMM D, YYYY'));
+
+
